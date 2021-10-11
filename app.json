@@ -1,0 +1,29 @@
+{
+  "name": "Telegram Youtube Downloader",
+  "description": "A Telegram Bot To Download Youtube Server ",
+  "logo": "https://telegra.ph/file/fe64e5b1ebecba97ca1dd.png",
+  "keywords": [
+    "Youtube","YoutubeDownloader" 
+  ],
+  "repository": "https://github.com/IDN-C-X/IDN-YoutubeDL-Bot",
+  "success_url": "https://github.com/IDN-C-X",
+  "website": "https://t.me/IDNCoderX",
+  "env": {
+        "API_ID": {"description": "Get this value from https://my.telegram.org", "required": true},
+        "API_HASH": {"description": "Get this value from https://my.telegram.org" , "required": true},
+        "BOT_TOKEN": {"description": "Get Bot Token From BotFather Bot","required": true}
+  },
+      "buildpacks": [
+        {"url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git"},
+        {"url": "heroku/python"}
+    ],
+  "formation": {
+        "worker": {
+            "quantity": 1,
+            "size": "free"
+        }
+    },
+      "stack": "heroku-20"
+
+
+}
