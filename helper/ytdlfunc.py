@@ -1,5 +1,5 @@
 import asyncio
-import youtube_dl
+import yt_dlp
 
 from __future__ import unicode_literals
 from utils.util import humanbytes
@@ -31,7 +31,7 @@ def create_buttons(quailitylist):
 
 
 def extractYt(yturl):
-    ydl = youtube_dl.YoutubeDL()
+    ydl = yt_dlp.YoutubeDL()
     with ydl:
         qualityList = []
         r = ydl.extract_info(yturl, download=False)
