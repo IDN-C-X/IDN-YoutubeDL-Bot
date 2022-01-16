@@ -33,19 +33,17 @@ def create_buttons(quailitylist):
 def extractYt(yturl):
     ydl = yt_dlp.YoutubeDL()
     with ydl:
-        qualityList = []
         r = ydl.extract_info(yturl, download=False)
-        for format in r["formats"]:
-            # Filter dash video(without audio)
-            if not "dash" in str(format["format"]).lower():
-                qualityList.append(
-                    {
-                        "format": format["format"],
-                        "filesize": format["filesize"],
-                        "format_id": format["format_id"],
-                        "yturl": yturl,
-                    }
-                )
+        qualityList = [
+            {
+                "format": format["format"],
+                "filesize": format["filesize"],
+                "format_id": format["format_id"],
+                "yturl": yturl,
+            }
+            for format in r["formats"]
+            if "dash" not in str(format["format"]).lower()
+        ]
 
         return r["title"], r["thumbnail"], qualityList
 
@@ -61,8 +59,7 @@ async def downloadvideocli(command_to_exec):
     e_response = stderr.decode().strip()
     t_response = stdout.decode().strip()
     print(e_response)
-    filename = t_response.split("Merging formats into")[-1].split('"')[1]
-    return filename
+    return t_response.split("Merging formats into")[-1].split('"')[1]
 
 
 async def downloadaudiocli(command_to_exec):
